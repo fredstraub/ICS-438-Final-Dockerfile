@@ -1,4 +1,8 @@
-Clone this repo onto your machine.
+Clone this repo onto your machine, in your terminal enter
+
+```
+https://github.com/fredstraub/ICS-438-Final-Dockerfile.git
+```
 
 Go to the directory with the docker-compose.yaml file, in your terminal enter
 
