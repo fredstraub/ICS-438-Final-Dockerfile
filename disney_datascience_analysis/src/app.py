@@ -1,10 +1,9 @@
-# App2
+# Run with terminal command 'python3 app.py' from main project directory
 # View at http://127.0.0.1:8050/ in your web browser
 
 # See project_writeup.ipynb for full details
 
-# Note: you may need to install additional libraries
-# if using a virtual environment, e.g.:
+# Note: you may need to install additional libraries, e.g.:
 ## dash
 ## dash_bootstrap_components
 ## dash_daq
@@ -14,6 +13,7 @@ from pandas.core.base import SelectionMixin
 
 import numpy as np
 
+# Import Dash and extra Plotly modules
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -32,7 +32,7 @@ from plotly.subplots import make_subplots
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SLATE])
 
-import pickle 
+import pickle
 
 # Load fig object saved from project_writeup.ipynb
 def load_fig(name):
@@ -186,7 +186,7 @@ app.layout = dbc.Container(fluid = True, children = [
                             ), style = dict(color = disney_dark_blue_hex),
                         ), width = 5),
                     ], style = dict(paddingTop = '4px')),
-                                        html.H4(
+                    html.H4(
 
                     ),
                 ]),
@@ -222,15 +222,15 @@ app.layout = dbc.Container(fluid = True, children = [
     ]),
     dbc.Container(fluid = True, children = [
         dcc.Tabs(
-        id = 'tabs',
-           colors = dict(
+            id = 'tabs',
+            colors = dict(
                 primary = 'black',
                 background = '#393F8F',
                 border = 'whitesmoke'
             ),
             children = tab_containers
-            ),
-            html.Div(id = 'tabs-content')
+        ),
+        html.Div(id = 'tabs-content')
     ]),
 ])
 
@@ -238,7 +238,7 @@ app.layout = dbc.Container(fluid = True, children = [
               Input('tabs', 'value'))
 def render_content(tab):
     if tab == 'tab-1':
-       return tab_content['ride_map']
+        return tab_content['ride_map']
     else:
         return tab_content[str(tab)]
 
@@ -252,4 +252,3 @@ def choose_extra_info(choice):
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-    # app.run_server(host='0.0.0.0', debug=True)
