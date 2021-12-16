@@ -79,7 +79,7 @@ cd ICS-438-Final-Dockerfile/disney_datascience_analysis
 To start the docker container in your terminal enter
 
 ```
-docker-compose-up
+docker-compose up
 ```
 
 Watch build output for the jupyter notebook link with token to access notebook.
