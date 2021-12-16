@@ -1,5 +1,4 @@
 # App2
-# Run with terminal command 'python3 app.py'
 # View at http://127.0.0.1:8050/ in your web browser
 
 # See project_writeup.ipynb for full details
@@ -18,23 +17,23 @@ import numpy as np
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_bootstrap_components as dbc
+import dash_daq as daq
 import dash_table as dt
 from dash_table.Format import Format, Scheme, Group
-import dash_bootstrap_components as dbc
-from plotly.express import data
-import dash_daq as daq
 from dash.dependencies import Input, Output, State
-
 from dash_bootstrap_templates import load_figure_template
 
 import plotly.express as px
+from plotly.express import data
+
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SLATE])
 
-# 37-155 NEW
 import pickle 
+
 # Load fig object saved from project_writeup.ipynb
 def load_fig(name):
     file_path = 'graphs/' + name + '.txt'
@@ -84,10 +83,10 @@ tab_labels = [
     '3: Stock Prices vs. Time',
     '4: Post Scores vs. Time',
     '5: Number of Comments vs. Time',
-    '6a: Stock Prices vs. Post Scores',
-    '6b: Stock Prices vs. Number of Comments',
-    '7a: Stock Price vs. Post Sentiment',
-    '7b: Stock Price vs. Comment Sentiment',
+    '6a: Stock Price vs. Post Sentiment',
+    '6b: Stock Price vs. Comment Sentiment',
+    '7a: Stock Prices vs. Post Scores',
+    '7b: Stock Prices vs. Number of Comments',
 ]
 
 # Access tab content via dictionary with callback
@@ -97,10 +96,10 @@ tab_content = dict(
     stock_prices = fig_graph_container(stock_prices_fig),
     post_scores = fig_graph_container(post_scores_fig),
     comments = fig_graph_container(comments_fig),
-    stock_post_reg = image_graph_container('stock_post_reg.png'),
-    stock_comment_reg = image_graph_container('stock_comment_reg.png'),
     post_sentiment = fig_graph_container(post_sentiment_fig),
     comment_sentiment = fig_graph_container(comment_sentiment_fig),
+    stock_post_reg = image_graph_container('stock_post_linreg.png'),
+    stock_comment_reg = image_graph_container('stock_comment_linreg.png'),
 )
 
 # Package each tab in a dcc.Tab
@@ -163,7 +162,7 @@ app.layout = dbc.Container(fluid = True, children = [
                     html.H1(
                         'Disney Subreddit Visualizations',
                         id = 'main-title',
-                    ), #166-192 NEW
+                    ),
                     html.H5(
                         'ICS 438 - Final Project, Fall 2021 - Andy Yu, Clark Whitehead, Frederick Straub, Kiko Whiteley',
                         style = dict(paddingTop = '0px')
@@ -231,7 +230,7 @@ app.layout = dbc.Container(fluid = True, children = [
             ),
             children = tab_containers
             ),
-            html.Div(id = 'tabs-content', style = dict(float = 'left'))
+            html.Div(id = 'tabs-content')
     ]),
 ])
 
@@ -252,4 +251,5 @@ def choose_extra_info(choice):
     return ""
 
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0', debug=True)
+    app.run_server(debug=True)
+    # app.run_server(host='0.0.0.0', debug=True)
